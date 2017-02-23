@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+  <com.github.jorgecastillo.FillableLoader
+      android:id="@+id/fillableLoader"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
+      app:fl_fillColor="#4CAF50"
+      app:fl_strokeColor="#FFFFFF"
+      app:fl_originalWidth="330"
+      app:fl_originalHeight="383"
+      app:fl_strokeDrawingDuration="2500"
+      app:fl_fillDuration="3500"
+      app:fl_clippingTransform="waves"
+      />
+
+<!--
+  ## Change fl_clippingTransform to change the animation
+  1. bites
+  2. plain
+  3. rounded
+  4. spikes
+  5. squares
+  6. waves
+
+  ## Control speed of animation by changing
+    fl_strokeDrawingDuration
+
+-->
+
+</RelativeLayout>

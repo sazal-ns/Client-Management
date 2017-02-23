@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CMS</string>
+
+    <!--Login-->
+    <string name="login">Login</string>
+    <string name="userName">User Name</string>
+    <string name="password">Password</string>
 </resources>

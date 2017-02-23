@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CMS</string>
+    <string name="login">লগইন</string>
+    <string name="password">পাসওয়াড</string>
+    <string name="userName">নাম</string>
+</resources>
