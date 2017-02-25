@@ -5,4 +5,9 @@
     <string name="login">Login</string>
     <string name="userName">User Name</string>
     <string name="password">Password</string>
+    <string name="error">Error</string>
+    <string name="loginFailed">Login Failed !!!</string>
+    <string name="enterUserName">Enter A UserName</string>
+    <string name="passwordError">minimum  6  alphanumeric characters</string>
+    <string name="authenticating">Authenticating...</string>
 </resources>

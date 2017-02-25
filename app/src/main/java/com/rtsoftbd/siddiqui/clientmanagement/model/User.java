@@ -5,36 +5,42 @@ package com.rtsoftbd.siddiqui.clientmanagement.model;
  */
 
 public class User {
-    private String  name, email, mobile, created_at, updated_at, loginDate;
+    private String  name, email, mobile, created_at, updated_at, loginDate, description;
     private int     id, status, credit, debit, balance, permission;
 
     public User() {
     }
 
-    public User(String name, String email, String mobile, int status, int credit, int debit, int balance, String loginDate) {
+    public User(String name, String email, String mobile, String created_at, String updated_at, String loginDate, String description, int id, int status, int credit, int debit, int balance, int permission) {
         this.name = name;
         this.email = email;
         this.mobile = mobile;
-        this.status = status;
-        this.credit = credit;
-        this.debit = debit;
-        this.balance = balance;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
         this.loginDate = loginDate;
-    }
-
-    public User(String name, String email, String mobile, String loginDate, int status, int credit, int debit, int balance, int permission, String created_at, String updated_at, int id) {
-        this.name = name;
-        this.email = email;
-        this.mobile = mobile;
-        this.loginDate = loginDate;
+        this.description = description;
+        this.id = id;
         this.status = status;
         this.credit = credit;
         this.debit = debit;
         this.balance = balance;
         this.permission = permission;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 
     public String getCreated_at() {

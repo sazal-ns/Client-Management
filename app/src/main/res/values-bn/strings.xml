@@ -3,5 +3,10 @@
     <string name="app_name">CMS</string>
     <string name="login">লগইন</string>
     <string name="password">পাসওয়াড</string>
-    <string name="userName">নাম</string>
+    <string name="userName">ব্যবহারকারীর নাম</string>
+    <string name="error">ভুল করেছেন</string>
+    <string name="loginFailed">লগইন ব্যর্থ</string>
+    <string name="enterUserName">ব্যবহারকারীর নাম লিখুন</string>
+    <string name="passwordError">সর্বনিম্ন ৬ টি আলফানিউমেরিক অক্ষর</string>
+    <string name="authenticating">পরীক্ষা করা হচ্ছে...</string>
 </resources>

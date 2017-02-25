@@ -5,7 +5,7 @@ package com.rtsoftbd.siddiqui.clientmanagement.helper;
  */
 
 public class ApiUrl {
-    private static final String baseUrl = "http://demo2.rtsoftbd.us/";
+    private static final String baseUrl = "http://demo2.rtsoftbd.us/api/";
 
     public static final String login = baseUrl.concat("user");
 
