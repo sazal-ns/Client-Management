@@ -1,8 +1,13 @@
 package com.rtsoftbd.siddiqui.clientmanagement;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,43 +18,226 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity{
+
+    private static final String TAG_DASHBOARD       = "DASHBOARD";
+    private static final String TAG_ADD_CLIENT      = "ADD CLIENT";
+    private static final String TAG_CLIENT_LIST     = "CLIENT LIST";
+    private static final String TAG_CREDIT_PAYMENT  = "CREDIT PAYMENT";
+    private static final String TAG_PAID_PAYMENT    = "PAID PAYMENT";
+    private static final String TAG_CREDIT_HISTORY  = "CREDIT HISTORY";
+    private static final String TAG_PAID_HISTORY    = "PAID HISTORY";
+    private static final String TAG_TOTAL_HISTORY   = "TOTAL HISTORY";
+    private static final String TAG_CHANGE_PASSWORD = "CHANGE PASSWORD";
+    private static final String TAG_PROFILE_UPDATE  = "PROFILE UPDATE";
+
+    private static String CURRENT_TAG = TAG_DASHBOARD;
+
+    public static int navItemIndex = 0;
+
+    private String[] activityTitles;
+
+    private NavigationView navigationView;
+    private DrawerLayout drawer;
+    private Toolbar toolbar;
+    private ActionBarDrawerToggle toggle;
+
+    private boolean shouldLoadHomeFragOnBackPress = true;
+    private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        mHandler = new Handler();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        activityTitles = getResources().getStringArray(R.array.nav_item_activity_title);
+
+        setUpNavigationView();
+
+        if (savedInstanceState == null) {
+            navItemIndex = 0;
+            CURRENT_TAG = TAG_DASHBOARD;
+            loadHomeFragment();
+        }
+
     }
+
+    private void setUpNavigationView() {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.dashboard:
+                        navItemIndex = 0;
+                        CURRENT_TAG = TAG_DASHBOARD;
+                        break;
+                    case R.id.addClient:
+                        navItemIndex = 1;
+                        CURRENT_TAG = TAG_ADD_CLIENT;
+                        break;
+                    case R.id.clientList:
+                        navItemIndex = 2;
+                        CURRENT_TAG = TAG_CLIENT_LIST;
+                        break;
+                    case R.id.creditPayment:
+                        navItemIndex = 3;
+                        CURRENT_TAG = TAG_CREDIT_PAYMENT;
+                        break;
+                    case R.id.debitPayment:
+                        navItemIndex = 4;
+                        CURRENT_TAG = TAG_PAID_PAYMENT;
+                        break;
+                    case R.id.creditHistory:
+                        navItemIndex = 5;
+                        CURRENT_TAG = TAG_CREDIT_HISTORY;
+                        break;
+                    case R.id.paidHistory:
+                        navItemIndex = 6;
+                        CURRENT_TAG = TAG_PAID_HISTORY;
+                        break;
+                    case R.id.totalHistory:
+                        navItemIndex = 7;
+                        CURRENT_TAG = TAG_TOTAL_HISTORY;
+                        break;
+                    case R.id.changePassword:
+                        navItemIndex = 8;
+                        CURRENT_TAG = TAG_CHANGE_PASSWORD;
+                        break;
+                    case R.id.profileUpdate:
+                        navItemIndex = 9;
+                        CURRENT_TAG = TAG_PROFILE_UPDATE;
+                        break;
+                    default:
+                        navItemIndex =0;
+                }
+
+                /*if (item.isChecked()) {
+                    item.setChecked(false);
+                } else {
+                    item.setChecked(true);
+                }
+                item.setChecked(true);*/
+
+                loadHomeFragment();
+                return true;
+            }
+        });
+
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+                super.onDrawerClosed(drawerView);
+            }
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+                super.onDrawerOpened(drawerView);
+            }
+        };
+
+        //Setting the actionbarToggle to drawer layout
+        drawer.setDrawerListener(actionBarDrawerToggle);
+
+        //calling sync state is necessary or else your hamburger icon wont show up
+        actionBarDrawerToggle.syncState();
+    }
+
+    private void loadHomeFragment() {
+        // selecting appropriate nav menu item
+        selectNavMenu();
+
+        // set toolbar title
+        setToolbarTitle();
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                Fragment fragment = getHomeFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                        android.R.anim.fade_out);
+                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+        };
+
+        if (runnable != null) {
+            mHandler.post(runnable);
+        }
+
+        //Closing drawer on item click
+        drawer.closeDrawers();
+
+        // refresh toolbar menu
+        invalidateOptionsMenu();
+    }
+
+    private Fragment getHomeFragment() {
+        switch (navItemIndex) {
+            case 1:
+                return new AddClientFragment();
+            case 2:
+
+            case 3:
+
+            case 4:
+
+            case 5:
+
+            case 6:
+
+            case 7:
+
+            case 8:
+
+            case 9:
+
+            default:
+                return new DashboardFragment();
+        }
+    }
+
+    private void selectNavMenu() {
+        navigationView.getMenu().getItem(navItemIndex);
+    }
+
+    private void setToolbarTitle() {
+        getSupportActionBar().setTitle(activityTitles[navItemIndex]);
+    }
+
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+            drawer.closeDrawers();
+            return;
         }
+        // This code loads home fragment when back key is pressed
+        // when user is in other fragment than home
+        if (shouldLoadHomeFragOnBackPress) {
+            // checking if user is on other navigation menu
+            // rather than home
+            if (navItemIndex != 0) {
+                navItemIndex = 0;
+                CURRENT_TAG = TAG_DASHBOARD;
+                loadHomeFragment();
+                return;
+            }
+        }
+
+        super.onBackPressed();
     }
 
     @Override
@@ -72,30 +260,5 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        /*if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }*/
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }

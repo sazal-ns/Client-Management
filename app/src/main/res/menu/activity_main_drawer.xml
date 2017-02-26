@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <item
         android:id="@+id/dashboard"
+        android:icon="@drawable/ic_dashboard_cyan_800_24dp"
         android:title="@string/dashboard" />
     <item android:title="@string/client" >
         <menu >
             <item
                 android:id="@+id/addClient"
-                android:icon="@drawable/ic_menu_camera"
+                android:icon="@drawable/ic_person_add_cyan_800_24dp"
                 android:title="@string/addClient" />
             <item
                 android:id="@+id/clientList"
-                android:icon="@drawable/ic_menu_gallery"
+                android:icon="@drawable/ic_people_cyan_800_24dp"
                 android:title="@string/clientList" />
         </menu>
     </item>
@@ -22,11 +22,11 @@
         <menu>
             <item
                 android:id="@+id/creditPayment"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_add_shopping_cart_teal_600_24dp"
                 android:title="@string/creditPayment" />
             <item
                 android:id="@+id/debitPayment"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_remove_shopping_cart_cyan_800_24dp"
                 android:title="@string/debitPayment" />
         </menu>
     </item>
@@ -35,15 +35,15 @@
         <menu>
             <item
                 android:id="@+id/creditHistory"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_assignment_cyan_800_24dp"
                 android:title="@string/creditHistory" />
             <item
                 android:id="@+id/paidHistory"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_assessment_cyan_800_24dp"
                 android:title="@string/paidHistory" />
             <item
                 android:id="@+id/totalHistory"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_playlist_add_check_cyan_800_24dp"
                 android:title="@string/totalHistory" />
         </menu>
     </item>
@@ -52,11 +52,11 @@
         <menu>
             <item
                 android:id="@+id/changePassword"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_vpn_key_cyan_800_24dp"
                 android:title="@string/changePassword" />
             <item
                 android:id="@+id/profileUpdate"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_transfer_within_a_station_cyan_800_24dp"
                 android:title="@string/profileUpdate" />
         </menu>
     </item>

@@ -154,6 +154,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void onValidateFailed() {
+        startActivity(new Intent(this, MainActivity.class));
         _loginButton.setEnabled(true);
     }
 

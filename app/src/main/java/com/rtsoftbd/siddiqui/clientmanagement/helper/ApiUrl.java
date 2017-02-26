@@ -11,5 +11,7 @@ public class ApiUrl {
 
     public static final String INDEX = BASE_URL.concat("adminpage");
 
+    public static final String ADD_CLIENT = BASE_URL.concat("addclient");
+
 
 }
