@@ -9,4 +9,22 @@
     <string name="enterUserName">ব্যবহারকারীর নাম লিখুন</string>
     <string name="passwordError">সর্বনিম্ন ৬ টি আলফানিউমেরিক অক্ষর</string>
     <string name="authenticating">পরীক্ষা করা হচ্ছে...</string>
+    <string name="action_settings">সেটিং</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="title_activity_main">Open navigation drawer</string>
+    <string name="dashboard">ড্যাশবোর্ড</string>
+    <string name="client">গ্রাহকের</string>
+    <string name="addClient">গ্রাহকের যোগ করুন</string>
+    <string name="clientList">গ্রাহকের তালিকা</string>
+    <string name="payments">লেনদেন</string>
+    <string name="creditPayment">জমা</string>
+    <string name="debitPayment">খরচ</string>
+    <string name="repoting">বিস্তারিত</string>
+    <string name="creditHistory">জমা এর হিসাব</string>
+    <string name="paidHistory">খরচ এর  হিসাব</string>
+    <string name="totalHistory">সম্পূর্ণ  হিসব</string>
+    <string name="myAccount">আমার অ্যাকাউন্ট</string>
+    <string name="changePassword">পাসওয়ার্ড পরিবর্তন</string>
+    <string name="profileUpdate">প্রোফাইল আপডেট</string>
 </resources>

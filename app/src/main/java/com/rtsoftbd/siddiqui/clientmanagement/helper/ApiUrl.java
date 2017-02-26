@@ -5,9 +5,11 @@ package com.rtsoftbd.siddiqui.clientmanagement.helper;
  */
 
 public class ApiUrl {
-    private static final String baseUrl = "http://demo2.rtsoftbd.us/api/";
+    private static final String BASE_URL = "http://demo2.rtsoftbd.us/api/";
 
-    public static final String login = baseUrl.concat("user");
+    public static final String LOGIN = BASE_URL.concat("user");
+
+    public static final String INDEX = BASE_URL.concat("adminpage");
 
 
 }

@@ -10,4 +10,24 @@
     <string name="enterUserName">Enter A UserName</string>
     <string name="passwordError">minimum  6  alphanumeric characters</string>
     <string name="authenticating">Authenticating...</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="client">Client</string>
+    <string name="addClient">Add Client</string>
+    <string name="clientList">Client List</string>
+    <string name="payments">Payments</string>
+    <string name="creditPayment">Credit Payment</string>
+    <string name="debitPayment">Paid Payment</string>
+    <string name="repoting">Repoting</string>
+    <string name="creditHistory">Credit History</string>
+    <string name="paidHistory">Paid History</string>
+    <string name="totalHistory">Total History</string>
+    <string name="myAccount">My Account</string>
+    <string name="changePassword">Change Password</string>
+    <string name="profileUpdate">Profile Update</string>
 </resources>

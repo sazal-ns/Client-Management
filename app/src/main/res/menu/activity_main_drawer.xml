@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/dashboard"
+        android:title="@string/dashboard" />
+    <item android:title="@string/client" >
+        <menu >
+            <item
+                android:id="@+id/addClient"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/addClient" />
+            <item
+                android:id="@+id/clientList"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="@string/clientList" />
+        </menu>
+    </item>
+
+    <item android:title="@string/payments">
+        <menu>
+            <item
+                android:id="@+id/creditPayment"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/creditPayment" />
+            <item
+                android:id="@+id/debitPayment"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/debitPayment" />
+        </menu>
+    </item>
+
+    <item android:title="@string/repoting">
+        <menu>
+            <item
+                android:id="@+id/creditHistory"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/creditHistory" />
+            <item
+                android:id="@+id/paidHistory"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/paidHistory" />
+            <item
+                android:id="@+id/totalHistory"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/totalHistory" />
+        </menu>
+    </item>
+
+    <item android:title="@string/myAccount">
+        <menu>
+            <item
+                android:id="@+id/changePassword"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/changePassword" />
+            <item
+                android:id="@+id/profileUpdate"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/profileUpdate" />
+        </menu>
+    </item>
+
+</menu>

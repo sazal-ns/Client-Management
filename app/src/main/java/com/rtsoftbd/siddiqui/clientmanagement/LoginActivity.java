@@ -1,6 +1,7 @@
 package com.rtsoftbd.siddiqui.clientmanagement;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -88,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             protected Void doInBackground(Void... params) {
 
-                StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.login, new Response.Listener<String>() {
+                StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.LOGIN, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
@@ -163,8 +164,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void onLoginSuccess() {
-       // _loginButton.setEnabled(true);
-        //finish();
+        _loginButton.setEnabled(true);
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
     private void onLoginFailed() {
