@@ -7,8 +7,8 @@
     <string name="password">Password</string>
     <string name="error">Error</string>
     <string name="loginFailed">Login Failed !!!</string>
-    <string name="enterUserName">Enter A UserName</string>
-    <string name="passwordError">minimum  6  alphanumeric characters</string>
+    <string name="enterUserName">between  3 and 50  alphanumeric characters</string>
+    <string name="passwordError">between  6 and 50  alphanumeric characters</string>
     <string name="authenticating">Authenticating...</string>
     <string name="title_activity_main">MainActivity</string>
 
@@ -58,4 +58,11 @@
         <item>@string/active</item>
         <item>@string/inactive</item>
     </string-array>
+    <string name="confromPassword">not match with password</string>
+    <string name="pleaseWait">Please Wait . . .</string>
+    <string name="validEmail">enter a valid email address</string>
+    <string name="validPhone">enter a valid mobile number</string>
+    <string name="success">Success</string>
+    <string name="successfullyAccomplished">Successfully Accomplished</string>
+    <string name="serverSays">Server Says That</string>
 </resources>

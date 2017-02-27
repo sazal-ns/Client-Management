@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private User user;
     private RequestQueue mQueue;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
         _loginButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+        progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getResources().getString(R.string.authenticating));
         progressDialog.show();
@@ -92,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                 StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.LOGIN, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        //progressDialog.hide();
                         //Log.d("doLogin onResponse", response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
@@ -146,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                progressDialog.hide();
+                //progressDialog.hide();
             }
         }.execute();
 
@@ -165,6 +166,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void onLoginSuccess() {
+        progressDialog.hide();
+        progressDialog.dismiss();
         _loginButton.setEnabled(true);
         startActivity(new Intent(this, MainActivity.class));
         finish();
@@ -183,14 +186,14 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        if (email.isEmpty() ) {
+        if (email.isEmpty() || password.length() < 3 && password.length() > 50 ) {
             _emailText.setError(getResources().getString(R.string.enterUserName));
             valid = false;
         } else {
             _emailText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 6) {
+        if (password.isEmpty() || password.length() < 6 && password.length() > 50) {
             _passwordText.setError(getResources().getString(R.string.passwordError));
             valid = false;
         } else {

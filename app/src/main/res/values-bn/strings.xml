@@ -4,10 +4,10 @@
     <string name="login">লগইন</string>
     <string name="password">পাসওয়াড</string>
     <string name="userName">ব্যবহারকারীর নাম</string>
-    <string name="error">ভুল করেছেন</string>
+    <string name="error">ভুল হয়েছে</string>
     <string name="loginFailed">লগইন ব্যর্থ</string>
-    <string name="enterUserName">ব্যবহারকারীর নাম লিখুন</string>
-    <string name="passwordError">সর্বনিম্ন ৬ টি আলফানিউমেরিক অক্ষর</string>
+    <string name="enterUserName">৩ থেকে ৫০ টি আলফানিউমেরিক অক্ষর</string>
+    <string name="passwordError">৬ থেকে ৫০ টি আলফানিউমেরিক অক্ষর</string>
     <string name="authenticating">পরীক্ষা করা হচ্ছে...</string>
     <string name="action_settings">সেটিং</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -34,4 +34,11 @@
     <string name="active">সক্রিয়</string>
     <string name="inactive">নিষ্ক্রিয়</string>
     <string name="description">বিবরণ</string>
+    <string name="confromPassword">পাসওয়াড এর সাথে মিলে নাই</string>
+    <string name="pleaseWait">অনুগ্রহ করে অপেক্ষা করুন . . .</string>
+    <string name="validEmail">একটি সঠিক ইমেইল লিখুন</string>
+    <string name="validPhone">একটি সঠিক মোবাইল নম্বর লিখুন</string>
+    <string name="success">সাফল্য</string>
+    <string name="successfullyAccomplished">সফলভাবে সম্পন্ন হয়েছে</string>
+    <string name="serverSays">সার্ভার বলছেন যে</string>
 </resources>
