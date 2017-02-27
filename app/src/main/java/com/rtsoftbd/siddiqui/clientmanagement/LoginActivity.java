@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.input_password) EditText _passwordText;
     @BindView(R.id.btn_login) Button _loginButton;
 
-    private User user;
     private RequestQueue mQueue;
     private ProgressDialog progressDialog;
 
@@ -83,7 +82,6 @@ public class LoginActivity extends AppCompatActivity {
             protected void onPreExecute() {
                 super.onPreExecute();
                 progressDialog.show();
-                user = new User();
                 mQueue = CustomVolleyRequestQueue.getInstance(getApplicationContext()).getRequestQueue();
             }
 
@@ -102,20 +100,21 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONObject object = jsonObject.getJSONObject("user");
                                 Log.d("doLogin onResponse", object.toString());
 
-                                user.setId(object.getInt("id"));
-                                user.setName(object.getString("name"));
-                                user.setEmail(object.getString("email"));
-                                user.setMobile(object.getString("mobile"));
-                                user.setStatus(object.getInt("status"));
-                                user.setCredit(object.getInt("credit"));
-                                user.setDebit(object.getInt("debit"));
-                                user.setBalance(object.getInt("balance"));
-                                user.setDescription(object.getString("description"));
-                                user.setPermission(object.getInt("permission"));
-                                user.setCreated_at(object.getString("created_at"));
-                                user.setUpdated_at(object.getString("updated_at"));
-                                user.setLoginDate(object.getString("loginDate"));
+                                User.setId(object.getInt("id"));
+                                User.setName(object.getString("name"));
+                                User.setEmail(object.getString("email"));
+                                User.setMobile(object.getString("mobile"));
+                                User.setStatus(object.getInt("status"));
+                                User.setCredit(object.getInt("credit"));
+                                User.setDebit(object.getInt("debit"));
+                                User.setBalance(object.getInt("balance"));
+                                User.setDescription(object.getString("description"));
+                                User.setPermission(object.getInt("permission"));
+                                User.setCreated_at(object.getString("created_at"));
+                                User.setUpdated_at(object.getString("updated_at"));
+                                User.setLoginDate(object.getString("loginDate"));
 
+                                Log.e("User Name", User.getName());
                                 onLoginSuccess();
                             }else onLoginFailed();
 

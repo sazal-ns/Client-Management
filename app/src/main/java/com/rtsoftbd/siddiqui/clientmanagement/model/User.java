@@ -5,129 +5,113 @@ package com.rtsoftbd.siddiqui.clientmanagement.model;
  */
 
 public class User {
-    private String  name, email, mobile, created_at, updated_at, loginDate, description;
-    private int     id, status, credit, debit, balance, permission;
+    private static String  name, email, mobile, created_at, updated_at, loginDate, description;
+    private static int     id, status, credit, debit, balance, permission;
 
     public User() {
     }
 
-    public User(String name, String email, String mobile, String created_at, String updated_at, String loginDate, String description, int id, int status, int credit, int debit, int balance, int permission) {
-        this.name = name;
-        this.email = email;
-        this.mobile = mobile;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
-        this.loginDate = loginDate;
-        this.description = description;
-        this.id = id;
-        this.status = status;
-        this.credit = credit;
-        this.debit = debit;
-        this.balance = balance;
-        this.permission = permission;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
-
-    public String getCreated_at() {
-        return created_at;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public static void setName(String name) {
+        User.name = name;
     }
 
-    public String getEmail() {
+    public static String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public static void setEmail(String email) {
+        User.email = email;
     }
 
-    public String getMobile() {
+    public static String getMobile() {
         return mobile;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public static void setMobile(String mobile) {
+        User.mobile = mobile;
     }
 
-    public String getUpdated_at() {
+    public static String getCreated_at() {
+        return created_at;
+    }
+
+    public static void setCreated_at(String created_at) {
+        User.created_at = created_at;
+    }
+
+    public static String getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(String updated_at) {
-        this.updated_at = updated_at;
+    public static void setUpdated_at(String updated_at) {
+        User.updated_at = updated_at;
     }
 
-    public String getLoginDate() {
+    public static String getLoginDate() {
         return loginDate;
     }
 
-    public void setLoginDate(String loginDate) {
-        this.loginDate = loginDate;
+    public static void setLoginDate(String loginDate) {
+        User.loginDate = loginDate;
     }
 
-    public int getStatus() {
+    public static String getDescription() {
+        return description;
+    }
+
+    public static void setDescription(String description) {
+        User.description = description;
+    }
+
+    public static int getId() {
+        return id;
+    }
+
+    public static void setId(int id) {
+        User.id = id;
+    }
+
+    public static int getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public static void setStatus(int status) {
+        User.status = status;
     }
 
-    public int getCredit() {
+    public static int getCredit() {
         return credit;
     }
 
-    public void setCredit(int credit) {
-        this.credit = credit;
+    public static void setCredit(int credit) {
+        User.credit = credit;
     }
 
-    public int getDebit() {
+    public static int getDebit() {
         return debit;
     }
 
-    public void setDebit(int debit) {
-        this.debit = debit;
+    public static void setDebit(int debit) {
+        User.debit = debit;
     }
 
-    public int getBalance() {
+    public static int getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public static void setBalance(int balance) {
+        User.balance = balance;
     }
 
-    public int getPermission() {
+    public static int getPermission() {
         return permission;
     }
 
-    public void setPermission(int permission) {
-        this.permission = permission;
+    public static void setPermission(int permission) {
+        User.permission = permission;
     }
 }

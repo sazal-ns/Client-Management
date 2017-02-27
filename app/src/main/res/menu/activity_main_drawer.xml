@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+<group android:checkableBehavior="single">
     <item
         android:id="@+id/dashboard"
         android:icon="@drawable/ic_dashboard_cyan_800_24dp"
         android:title="@string/dashboard" />
+</group>
     <item android:title="@string/client" >
         <menu >
+            <group android:checkableBehavior="single">
             <item
                 android:id="@+id/addClient"
                 android:icon="@drawable/ic_person_add_cyan_800_24dp"
@@ -15,11 +17,13 @@
                 android:id="@+id/clientList"
                 android:icon="@drawable/ic_people_cyan_800_24dp"
                 android:title="@string/clientList" />
+            </group>
         </menu>
     </item>
 
     <item android:title="@string/payments">
         <menu>
+            <group android:checkableBehavior="single">
             <item
                 android:id="@+id/creditPayment"
                 android:icon="@drawable/ic_add_shopping_cart_teal_600_24dp"
@@ -28,11 +32,13 @@
                 android:id="@+id/debitPayment"
                 android:icon="@drawable/ic_remove_shopping_cart_cyan_800_24dp"
                 android:title="@string/debitPayment" />
+            </group>
         </menu>
     </item>
 
     <item android:title="@string/repoting">
         <menu>
+            <group android:checkableBehavior="single">
             <item
                 android:id="@+id/creditHistory"
                 android:icon="@drawable/ic_assignment_cyan_800_24dp"
@@ -45,11 +51,13 @@
                 android:id="@+id/totalHistory"
                 android:icon="@drawable/ic_playlist_add_check_cyan_800_24dp"
                 android:title="@string/totalHistory" />
+            </group>
         </menu>
     </item>
 
     <item android:title="@string/myAccount">
         <menu>
+            <group android:checkableBehavior="single">
             <item
                 android:id="@+id/changePassword"
                 android:icon="@drawable/ic_vpn_key_cyan_800_24dp"
@@ -58,6 +66,7 @@
                 android:id="@+id/profileUpdate"
                 android:icon="@drawable/ic_transfer_within_a_station_cyan_800_24dp"
                 android:title="@string/profileUpdate" />
+            </group>
         </menu>
     </item>
 
