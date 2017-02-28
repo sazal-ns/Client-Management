@@ -17,5 +17,9 @@ public class ApiUrl {
 
     public static final String EDIT_CLIENT = BASE_URL.concat("clientedit");
 
+    public static final String  CREDIT_HISTORY = BASE_URL.concat("creditHistory");
+
+    public static final String  PAID_HISTORY = BASE_URL.concat("paidHistory");
+
 
 }

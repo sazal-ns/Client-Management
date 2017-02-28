@@ -17,5 +17,12 @@
   <color name="iron">#CCCCCC</color>
   <color name="white">#FFFFFF</color>
   <color name="dark_jungle_green">#1a1a1a</color>
+
+  <!--Custom List-->
+  <color name="list_divider">#d9d9d9</color>
+  <color name="list_row_start_color">#ffffff</color>
+  <color name="list_row_end_color">#ffffff</color>
+  <color name="list_row_hover_start_color">#ebeef0</color>
+  <color name="list_row_hover_end_color">#ebeef0</color>
 </resources>
 

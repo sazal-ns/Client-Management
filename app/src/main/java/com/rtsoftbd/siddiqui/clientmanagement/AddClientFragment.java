@@ -174,13 +174,13 @@ public class AddClientFragment extends Fragment {
 
                             if (jsonObject.getString("error").contentEquals("false")){
                                 new ShowDialog(getContext(), getResources().getString(R.string.success),
-                                        getResources().getString(R.string.successfullyAccomplished),
+                                        getResources().getString(R.string.successfullyAccomplished),true,
                                         getResources().getDrawable(R.drawable.ic_done_all_green_a700_24dp));
                             }else{
                                 JSONObject object = jsonObject.getJSONObject("message");
                                 JSONArray array = object.getJSONArray("name");
                                 new ShowDialog(getContext(), getResources().getString(R.string.error),
-                                        getResources().getString(R.string.serverSays)+"\n"+array.toString(),
+                                        getResources().getString(R.string.serverSays)+"\n"+array.toString(),true,
                                         getResources().getDrawable(R.drawable.ic_error_red_a700_24dp));
                             }
                         } catch (JSONException e) {

@@ -184,9 +184,9 @@ public class MainActivity extends AppCompatActivity{
             case 4:
                 return new DashboardFragment();
             case 5:
-                return new DashboardFragment();
+                return new CreditHistoryFragment();
             case 6:
-                return new DashboardFragment();
+                return new PaidHistoryFragment();
             case 7:
                 return new DashboardFragment();
             case 8:

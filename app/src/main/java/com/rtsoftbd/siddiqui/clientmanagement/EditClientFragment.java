@@ -2,12 +2,10 @@ package com.rtsoftbd.siddiqui.clientmanagement;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.hardware.usb.UsbRequest;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -152,7 +150,7 @@ public class EditClientFragment extends Fragment {
 
                             if (jsonObject.getString("error").contentEquals("false")){
                                 new ShowDialog(getContext(), getResources().getString(R.string.success),
-                                        getResources().getString(R.string.successfullyAccomplished),
+                                        getResources().getString(R.string.successfullyAccomplished),true,
                                         getResources().getDrawable(R.drawable.ic_done_all_green_a700_24dp));
                             }else{
                                 JSONObject object = jsonObject.getJSONObject("message");
@@ -160,7 +158,7 @@ public class EditClientFragment extends Fragment {
                                 try{
                                     JSONArray array = object.getJSONArray("mobile");
                                     new ShowDialog(getContext(), getResources().getString(R.string.error),
-                                            getResources().getString(R.string.serverSays)+"\n"+array.toString(),
+                                            getResources().getString(R.string.serverSays)+"\n"+array.toString(),true,
                                             getResources().getDrawable(R.drawable.ic_error_red_a700_24dp));
 
                                 }catch (JSONException e){
@@ -170,7 +168,7 @@ public class EditClientFragment extends Fragment {
                                 try{
                                     JSONArray array = object.getJSONArray("email");
                                     new ShowDialog(getContext(), getResources().getString(R.string.error),
-                                            getResources().getString(R.string.serverSays)+"\n"+array.toString(),
+                                            getResources().getString(R.string.serverSays)+"\n"+array.toString(),true,
                                             getResources().getDrawable(R.drawable.ic_error_red_a700_24dp));
 
                                 }catch (JSONException e){
@@ -180,7 +178,7 @@ public class EditClientFragment extends Fragment {
                                 try{
                                     JSONArray array = object.getJSONArray("name");
                                     new ShowDialog(getContext(), getResources().getString(R.string.error),
-                                            getResources().getString(R.string.serverSays)+"\n"+array.toString(),
+                                            getResources().getString(R.string.serverSays)+"\n"+array.toString(),true,
                                             getResources().getDrawable(R.drawable.ic_error_red_a700_24dp));
 
                                 }catch (JSONException e){

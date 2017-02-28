@@ -19,17 +19,20 @@ public class ShowDialog extends AppCompatActivity{
     Context context;
     String  content,title;
     Drawable icon;
+    Boolean is;
 
-    public ShowDialog(Context context, String title, String content, Drawable icon) {
+    public ShowDialog(Context context, String title, String content,Boolean is, Drawable icon) {
         this.title = title;
         this.context = context;
         this.content = content;
         this.icon = icon;
+        this.is = is;
 
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context)
                 .title(title)
                 .content(content)
-                .icon(icon);
+                .icon(icon)
+                .cancelable(is);
         MaterialDialog dialog = builder.build();
         dialog.show();
     }

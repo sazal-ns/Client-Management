@@ -8,7 +8,7 @@
     <string name="loginFailed">লগইন ব্যর্থ</string>
     <string name="enterUserName">৩ থেকে ৫০ টি আলফানিউমেরিক অক্ষর</string>
     <string name="passwordError">৬ থেকে ৫০ টি আলফানিউমেরিক অক্ষর</string>
-    <string name="authenticating">পরীক্ষা করা হচ্ছে...</string>
+    <string name="authenticating">পরীক্ষা করা হচ্ছে…</string>
     <string name="action_settings">সেটিং</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -42,4 +42,9 @@
     <string name="successfullyAccomplished">সফলভাবে সম্পন্ন হয়েছে</string>
     <string name="serverSays">সার্ভার বলছেন যে</string>
     <string name="save">সংরক্ষণ</string>
+    <string name="timeDate">তারিখ এবং সময়</string>
+    <string name="name">নাম</string>
+    <string name="balance">জের</string>
+    <string name="totalCredit">সম্পূর্ণ  জমা</string>
+    <string name="totalPaid">সম্পূর্ণ  খরচ</string>
 </resources>

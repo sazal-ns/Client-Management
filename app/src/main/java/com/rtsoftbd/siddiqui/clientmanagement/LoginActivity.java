@@ -91,14 +91,11 @@ public class LoginActivity extends AppCompatActivity {
                 StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.LOGIN, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //progressDialog.hide();
-                        //Log.d("doLogin onResponse", response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
 
                             if (jsonObject.getString("error").contentEquals("false")){
                                 JSONObject object = jsonObject.getJSONObject("user");
-                                Log.d("doLogin onResponse", object.toString());
 
                                 User.setId(object.getInt("id"));
                                 User.setName(object.getString("name"));
@@ -154,7 +151,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void onValidateFailed() {
-        startActivity(new Intent(this, MainActivity.class));
         _loginButton.setEnabled(true);
     }
 
@@ -173,8 +169,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void onLoginFailed() {
+        progressDialog.dismiss();
         new ShowDialog(LoginActivity.this, getResources().getString(R.string.error),
-                getResources().getString(R.string.loginFailed),getResources().getDrawable(R.drawable.ic_warning_red_24dp));
+                getResources().getString(R.string.loginFailed),false,getResources().getDrawable(R.drawable.ic_warning_red_24dp));
 
         _loginButton.setEnabled(true);
     }

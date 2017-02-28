@@ -66,4 +66,9 @@
     <string name="successfullyAccomplished">Successfully Accomplished</string>
     <string name="serverSays">Server Says That</string>
     <string name="save">Save</string>
+    <string name="timeDate">Date &amp; Time</string>
+    <string name="name">Name</string>
+    <string name="balance">Balance</string>
+    <string name="totalCredit">Total Credit</string>
+    <string name="totalPaid">Total Paid</string>
 </resources>
