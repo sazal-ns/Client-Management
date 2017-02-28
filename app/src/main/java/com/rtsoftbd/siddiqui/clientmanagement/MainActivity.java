@@ -119,13 +119,6 @@ public class MainActivity extends AppCompatActivity{
                         navItemIndex =0;
                 }
 
-                /*if (item.isChecked()) {
-                    item.setChecked(false);
-                } else {
-                    item.setChecked(true);
-                }*/
-                //item.setChecked(true);
-
                 loadHomeFragment();
                 return true;
             }
@@ -153,8 +146,6 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void loadHomeFragment() {
-        // selecting appropriate nav menu item
-        //selectNavMenu();
 
         // set toolbar title
         setToolbarTitle();
@@ -205,10 +196,6 @@ public class MainActivity extends AppCompatActivity{
             default:
                 return new DashboardFragment();
         }
-    }
-
-    private void selectNavMenu() {
-        navigationView.getMenu().getItem(navItemIndex);
     }
 
     private void setToolbarTitle() {

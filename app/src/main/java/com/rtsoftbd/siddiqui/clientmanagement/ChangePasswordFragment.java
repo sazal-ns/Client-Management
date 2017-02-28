@@ -1,7 +1,9 @@
 package com.rtsoftbd.siddiqui.clientmanagement;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,7 +13,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.rtsoftbd.siddiqui.clientmanagement.helper.ApiUrl;
+import com.rtsoftbd.siddiqui.clientmanagement.helper.ShowDialog;
 import com.rtsoftbd.siddiqui.clientmanagement.model.User;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +59,8 @@ public class ChangePasswordFragment extends Fragment {
     @BindView(R.id.changePasswordButton) Button changePasswordButton;
 
     private String password, confirmPassword;
+
+    private ProgressDialog progressDialog;
 
     public ChangePasswordFragment() {
         // Required empty public constructor
@@ -108,6 +126,61 @@ public class ChangePasswordFragment extends Fragment {
             onValidateFailed();
             return;
         }
+
+        changePasswordButton.setEnabled(false);
+
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage(getResources().getString(R.string.pleaseWait));
+        progressDialog.show();
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(final Void... params) {
+
+                StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.CHANGE_PASSWORD, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        changePasswordButton.setEnabled(true);
+                        Log.e("onResponse", response);
+                        JSONObject jsonObject = null;
+                        try {
+                            jsonObject = new JSONObject(response);
+
+                            if (jsonObject.getString("error").contentEquals("false")) {
+                                new ShowDialog(getContext(), getResources().getString(R.string.success),
+                                        getResources().getString(R.string.successfullyAccomplished),
+                                        getResources().getDrawable(R.drawable.ic_done_all_green_a700_24dp));
+                            }else  new ShowDialog(getContext(), getResources().getString(R.string.error),
+                                    getResources().getString(R.string.serverSays)+"\n"+ getResources().getString(R.string.error),
+                                    getResources().getDrawable(R.drawable.ic_error_red_a700_24dp));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("onErrorResponse", error.toString());
+                    }
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("password", password);
+                        params.put("confirmPassword", confirmPassword);
+                        params.put("id", String.valueOf(User.getId()));
+
+                        return params;
+                    }
+                };
+
+                Volley.newRequestQueue(getContext()).add(request);
+
+                return null;
+            }
+        }.execute();
 
 
     }
