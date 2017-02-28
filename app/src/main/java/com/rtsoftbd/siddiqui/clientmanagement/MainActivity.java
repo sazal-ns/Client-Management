@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity{
             case 8:
                 return new ChangePasswordFragment();
             case 9:
-                return new DashboardFragment();
+                return new EditClientFragment();
             default:
                 return new DashboardFragment();
         }

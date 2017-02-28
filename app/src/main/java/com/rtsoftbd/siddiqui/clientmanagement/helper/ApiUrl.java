@@ -15,5 +15,7 @@ public class ApiUrl {
 
     public static final String  CHANGE_PASSWORD = BASE_URL.concat("profileUpdate");
 
+    public static final String EDIT_CLIENT = BASE_URL.concat("clientedit");
+
 
 }

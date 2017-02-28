@@ -41,4 +41,5 @@
     <string name="success">সাফল্য</string>
     <string name="successfullyAccomplished">সফলভাবে সম্পন্ন হয়েছে</string>
     <string name="serverSays">সার্ভার বলছেন যে</string>
+    <string name="save">সংরক্ষণ</string>
 </resources>
