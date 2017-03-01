@@ -71,4 +71,12 @@
     <string name="balance">Balance</string>
     <string name="totalCredit">Total Credit</string>
     <string name="totalPaid">Total Paid</string>
+    <string name="noInternet">There is no Internet connection</string>
+    <string name="signOut">SING OUT</string>
+    <string name="exitApp">Exit</string>
+    <string name="areYouSure">Are you sure to EXIT ?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="lastLogin">Last Login</string>
+    <string name="created">Created</string>
 </resources>

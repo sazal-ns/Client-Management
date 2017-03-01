@@ -70,4 +70,11 @@
         </menu>
     </item>
 
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_power_settings_new_red_a700_36dp"
+            android:title="@string/signOut"/>
+    </group>
+
 </menu>

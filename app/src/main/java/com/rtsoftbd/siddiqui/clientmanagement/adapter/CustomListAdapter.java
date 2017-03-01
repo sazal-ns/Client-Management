@@ -27,15 +27,16 @@ import butterknife.ButterKnife;
 
 public class CustomListAdapter extends BaseAdapter {
 
-   // private Activity activity;
     private FragmentActivity activity;
     private LayoutInflater layoutInflater;
+    private Boolean isTotal;
 
     private List<Credit> credits;
 
-    public CustomListAdapter(FragmentActivity activity, List<Credit> credits) {
+    public CustomListAdapter(FragmentActivity activity, List<Credit> credits, Boolean isTotal) {
         this.activity = activity;
         this.credits = credits;
+        this.isTotal = isTotal;
     }
 
 
@@ -66,6 +67,7 @@ public class CustomListAdapter extends BaseAdapter {
         TextView name = (TextView) convertView.findViewById(R.id.nameTextViewRow);
         TextView creditPayment = (TextView) convertView.findViewById(R.id.creditPaymentTextViewRow);
         TextView balance = (TextView) convertView.findViewById(R.id.balanceTextViewRow);
+        TextView debitPayment = (TextView) convertView.findViewById(R.id.debitPaymentTextViewRow);
 
         Credit c = credits.get(position);
 
@@ -73,7 +75,13 @@ public class CustomListAdapter extends BaseAdapter {
         name.setText(c.getName());
         creditPayment.setText(String.valueOf(c.getMixBalance()));
         balance.setText(String.valueOf(c.getRecentBalance()));
-
+        if (isTotal){
+            creditPayment.setText(String.valueOf(c.getCredit()));
+            debitPayment.setText(String.valueOf(c.getDebit()));
+        }
+        else {
+            debitPayment.setVisibility(View.GONE);
+        }
         return convertView;
     }
 }

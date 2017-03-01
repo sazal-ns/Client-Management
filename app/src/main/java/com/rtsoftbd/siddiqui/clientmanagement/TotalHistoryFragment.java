@@ -39,12 +39,12 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link PaidHistoryFragment.OnFragmentInteractionListener} interface
+ * {@link TotalHistoryFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link PaidHistoryFragment#newInstance} factory method to
+ * Use the {@link TotalHistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PaidHistoryFragment extends Fragment {
+public class TotalHistoryFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -57,14 +57,17 @@ public class PaidHistoryFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     @BindView(R.id.list) ListView listView;
-    @BindView(R.id.totalBalanceTextView) TextView totalBalanceTextView;
+    @BindView(R.id.totalCreditTextView) TextView totalCredit;
+    @BindView(R.id.totalPaidTextView) TextView totalPaid;
+    @BindView(R.id.totalBalanceTextView) TextView totalBalance;
+
+    private int tCredit, tPaid, tBalance;
 
     private ProgressDialog progressDialog;
     private List<Credit> credits = new ArrayList<>();
     private CustomListAdapter customListAdapter;
-    private int totalCredit;
 
-    public PaidHistoryFragment() {
+    public TotalHistoryFragment() {
         // Required empty public constructor
     }
 
@@ -74,11 +77,11 @@ public class PaidHistoryFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment PaidHistoryFragment.
+     * @return A new instance of fragment TotalHistoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PaidHistoryFragment newInstance(String param1, String param2) {
-        PaidHistoryFragment fragment = new PaidHistoryFragment();
+    public static TotalHistoryFragment newInstance(String param1, String param2) {
+        TotalHistoryFragment fragment = new TotalHistoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -99,14 +102,14 @@ public class PaidHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_paid_history, container, false);
+        View view = inflater.inflate(R.layout.fragment_total_history, container, false);
+        ButterKnife.bind(this, view);
 
-        ButterKnife.bind(this,view);
+        tCredit = tPaid = tBalance = 0;
 
-        customListAdapter = new CustomListAdapter(getActivity(), credits, false);
+        customListAdapter = new CustomListAdapter(getActivity(), credits, true);
         listView.setAdapter(customListAdapter);
 
-        totalCredit =0;
         showList();
 
         return view;
@@ -118,14 +121,14 @@ public class PaidHistoryFragment extends Fragment {
         progressDialog.setMessage(getResources().getString(R.string.pleaseWait));
         progressDialog.show();
 
-        StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.PAID_HISTORY, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.TOTAL_HISTORY, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getString("error").contentEquals("false")) {
-                        JSONArray jsonArray = jsonObject.getJSONArray("paidHistory");
+                        JSONArray jsonArray = jsonObject.getJSONArray("totalHistory");
 
                         for (int i = 0; i< jsonArray.length(); i++){
                             JSONObject object = jsonArray.getJSONObject(i);
@@ -142,11 +145,15 @@ public class PaidHistoryFragment extends Fragment {
                             credit.setDate(object.getString("date"));
                             credit.setReportDate(object.getString("reportDate"));
 
-                            totalCredit+=credit.getMixBalance();
+                            tCredit+=credit.getCredit();
+                            tPaid+=credit.getDebit();
+                            tBalance= tCredit - tPaid;
                             credits.add(credit);
                         }
                         customListAdapter.notifyDataSetChanged();
-                        totalBalanceTextView.setText(getResources().getString(R.string.totalPaid)+" " + totalCredit);
+                        totalPaid.setText(getResources().getString(R.string.totalPaid)+" " + tPaid);
+                        totalCredit.setText(getResources().getString(R.string.totalCredit)+" "+tCredit);
+                        totalBalance.setText(getResources().getString(R.string.balance)+" "+tBalance);
                     }else{
                         Log.e("else",response);
                     }

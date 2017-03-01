@@ -162,7 +162,11 @@ public class ChangePasswordFragment extends Fragment {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("onErrorResponse", error.toString());
+                        progressDialog.dismiss();
+                        Log.e("Error", error.toString());
+                        if (error.toString().contains("NoConnectionError")){
+                            new ShowDialog(getContext(), null, getResources().getString(R.string.noInternet),true,null);
+                        }
                     }
                 }){
                     @Override

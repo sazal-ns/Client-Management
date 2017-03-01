@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.rtsoftbd.siddiqui.clientmanagement.adapter.CustomListAdapter;
 import com.rtsoftbd.siddiqui.clientmanagement.helper.ApiUrl;
+import com.rtsoftbd.siddiqui.clientmanagement.helper.ShowDialog;
 import com.rtsoftbd.siddiqui.clientmanagement.model.Credit;
 
 import org.json.JSONArray;
@@ -104,7 +105,7 @@ public class CreditHistoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_credit_history, container, false);
         ButterKnife.bind(this,view);
 
-        customListAdapter = new CustomListAdapter(getActivity(), credits);
+        customListAdapter = new CustomListAdapter(getActivity(), credits, false);
         listView.setAdapter(customListAdapter);
 
         totalCredit =0;
@@ -161,7 +162,11 @@ public class CreditHistoryFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("onErrorResponse", error.toString());
+                progressDialog.dismiss();
+                Log.e("Error", error.toString());
+                if (error.toString().contains("NoConnectionError")){
+                    new ShowDialog(getContext(), null, getResources().getString(R.string.noInternet),true,null);
+                }
             }
         }){
             @Override

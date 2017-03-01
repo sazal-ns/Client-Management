@@ -44,7 +44,15 @@
     <string name="save">সংরক্ষণ</string>
     <string name="timeDate">তারিখ এবং সময়</string>
     <string name="name">নাম</string>
-    <string name="balance">জের</string>
+    <string name="balance">মোট জের</string>
     <string name="totalCredit">সম্পূর্ণ  জমা</string>
     <string name="totalPaid">সম্পূর্ণ  খরচ</string>
+    <string name="noInternet">ইন্টারনেট নেই</string>
+    <string name="signOut">সাইন আউট</string>
+    <string name="exitApp">বন্ধ</string>
+    <string name="areYouSure">আপনি প্রস্থান করার ব্যাপারে নিশ্চিত?</string>
+    <string name="yes">হাঁ</string>
+    <string name="no">না</string>
+    <string name="lastLogin">শেষ লগইন</string>
+    <string name="created">নির্মিত</string>
 </resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8sp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:text="@string/name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/nameTextViewRow"
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="@string/mobile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/mobileTextViewRow"
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="@string/balance"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/balanceTextViewRow"
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="@string/lastLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/lastLoginTextViewRow"
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="@string/created"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/createdTextViewRow"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:id="@+id/statusImageViewRow"
+        android:src="@drawable/ic_check_green_a700_24dp"/>
+
+</LinearLayout>

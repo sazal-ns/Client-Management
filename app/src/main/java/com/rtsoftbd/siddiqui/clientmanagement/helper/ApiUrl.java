@@ -21,5 +21,9 @@ public class ApiUrl {
 
     public static final String  PAID_HISTORY = BASE_URL.concat("paidHistory");
 
+    public static final String TOTAL_HISTORY = BASE_URL.concat("totalHistory");
+
+    public static final String CLIENT_LIST = BASE_URL.concat("clientList");
+
 
 }

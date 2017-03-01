@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -194,7 +195,11 @@ public class EditClientFragment extends Fragment {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        progressDialog.dismiss();
+                        Log.e("Error", error.toString());
+                        if (error.toString().contains("NoConnectionError")){
+                            new ShowDialog(getContext(), null, getResources().getString(R.string.noInternet),true,null);
+                        }
                     }
                 }){
                     @Override

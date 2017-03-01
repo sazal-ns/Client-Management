@@ -1,9 +1,11 @@
 package com.rtsoftbd.siddiqui.clientmanagement;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -122,7 +124,12 @@ public class LoginActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        _loginButton.setEnabled(true);
                         Log.e("Error", error.toString());
+                       if (error.toString().contains("NoConnectionError")){
+                           new ShowDialog(LoginActivity.this, null, getResources().getString(R.string.noInternet),true,null);
+                       }
                     }
                 }){
                     @Override
@@ -157,7 +164,21 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // disable going back to the MainActivity
-        moveTaskToBack(true);
+       // moveTaskToBack(true);
+            new AlertDialog.Builder(this)
+                    .setIcon(getResources().getDrawable(R.drawable.ic_power_settings_new_red_a700_36dp))
+                    .setTitle(getResources().getString(R.string.exitApp))
+                    .setMessage(getResources().getString(R.string.areYouSure))
+                    .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+
+                    })
+                    .setNegativeButton(getResources().getString(R.string.no), null)
+                    .show();
     }
 
     private void onLoginSuccess() {
@@ -182,14 +203,14 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        if (email.isEmpty() || password.length() < 3 && password.length() > 50 ) {
+        if (email.isEmpty() || password.length() < 3 || password.length() > 50 ) {
             _emailText.setError(getResources().getString(R.string.enterUserName));
             valid = false;
         } else {
             _emailText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 6 && password.length() > 50) {
+        if (password.isEmpty() || password.length() < 6 || password.length() > 50) {
             _passwordText.setError(getResources().getString(R.string.passwordError));
             valid = false;
         } else {
@@ -198,6 +219,7 @@ public class LoginActivity extends AppCompatActivity {
 
         return valid;
     }
+
 
     @Override
     protected void onStop() {

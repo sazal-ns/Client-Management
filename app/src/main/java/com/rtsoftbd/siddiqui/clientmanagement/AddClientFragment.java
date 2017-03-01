@@ -191,6 +191,11 @@ public class AddClientFragment extends Fragment {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Log.e("Error", error.toString());
+                        if (error.toString().contains("NoConnectionError")){
+                            new ShowDialog(getContext(), null, getResources().getString(R.string.noInternet),true,null);
+                        }
                     }
                 }){
                     @Override
@@ -230,12 +235,12 @@ public class AddClientFragment extends Fragment {
     private boolean validate() {
         boolean valid = true;
 
-        if (userName.isEmpty() || userName.length()<3 && userName.length()>50){
+        if (userName.isEmpty() || userName.length()< 3 || userName.length()>50){
             userNameEditText.setError(getResources().getString(R.string.enterUserName));
             valid = false;
         }else userNameEditText.setError(null);
 
-        if (password.isEmpty() || password.length() < 6 && password.length() > 50){
+        if (password.isEmpty() || password.length() < 6 || password.length() > 50){
             passwordEditText.setError(getResources().getString(R.string.passwordError));
             valid = false;
         }else passwordEditText.setError(null);
