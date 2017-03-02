@@ -44,6 +44,11 @@
                 android:layout_weight="1" />
         </LinearLayout>
 
+    <include
+        layout="@layout/date_get"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"

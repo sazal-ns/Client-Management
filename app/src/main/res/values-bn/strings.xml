@@ -55,4 +55,7 @@
     <string name="no">না</string>
     <string name="lastLogin">শেষ লগইন</string>
     <string name="created">নির্মিত</string>
+    <string name="selectToDate">তারিখ পর্যন্ত</string>
+    <string name="setDate">তারিখ নির্বাচন করুন</string>
+    <string name="selectFromDate">তারিখ হইতে</string>
 </resources>

@@ -79,4 +79,7 @@
     <string name="no">NO</string>
     <string name="lastLogin">Last Login</string>
     <string name="created">Created</string>
+    <string name="selectToDate">To Date</string>
+    <string name="selectFromDate">From Date</string>
+    <string name="setDate">Set Date</string>
 </resources>

@@ -232,7 +232,7 @@ public class EditClientFragment extends Fragment {
     private boolean validate() {
         boolean valid = true;
 
-        if (userName.isEmpty() || userName.length() < 3 && userName.length() > 50 ) {
+        if (userName.isEmpty() || userName.length() < 3 || userName.length() > 50 ) {
             userNameEditText.setError(getResources().getString(R.string.enterUserName));
             valid = false;
         } else {

@@ -60,6 +60,11 @@
         android:layout_below="@+id/head"
         android:layout_above="@+id/below"/>
 
+    <include
+        layout="@layout/date_get"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,14 +1,20 @@
 package com.rtsoftbd.siddiqui.clientmanagement;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,13 +33,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.view.View.GONE;
 
 
 /**
@@ -60,6 +72,18 @@ public class TotalHistoryFragment extends Fragment {
     @BindView(R.id.totalCreditTextView) TextView totalCredit;
     @BindView(R.id.totalPaidTextView) TextView totalPaid;
     @BindView(R.id.totalBalanceTextView) TextView totalBalance;
+
+    @BindView(R.id.toDateEditText) EditText toDateEditText;
+    @BindView(R.id.fromDateEditText) EditText fromDateEditText;
+    @BindView(R.id.btn_setDate) Button setDate;
+    @BindView(R.id.head) LinearLayout head;
+    @BindView(R.id.a) TextInputLayout a;
+    @BindView(R.id.b) TextInputLayout b;
+
+    private Calendar calendar= Calendar.getInstance();
+
+    String toDate, fromDate;
+    int one=0, two=0;
 
     private int tCredit, tPaid, tBalance;
 
@@ -110,12 +134,115 @@ public class TotalHistoryFragment extends Fragment {
         customListAdapter = new CustomListAdapter(getActivity(), credits, true);
         listView.setAdapter(customListAdapter);
 
-        showList();
+        head.setVisibility(GONE);
+        listView.setVisibility(GONE);
+        totalBalance.setVisibility(GONE);
+        totalPaid.setVisibility(GONE);
+        totalCredit.setVisibility(GONE);
+
+        toDateEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), dateSetListener, calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)).show();
+                one=1;
+            }
+        });
+
+        fromDateEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), dateSetListener, calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)).show();
+                two = 1;
+            }
+        });
+
+        setDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!validate()) {
+                    onValidateFailed();
+                    return;
+                }
+
+                fromDateEditText.setVisibility(GONE);
+                a.setVisibility(View.GONE);
+                toDateEditText.setVisibility(GONE);
+                b.setVisibility(View.GONE);
+                setDate.setVisibility(GONE);
+
+
+                head.setVisibility(View.VISIBLE);
+                listView.setVisibility(View.VISIBLE);
+                totalBalance.setVisibility(View.VISIBLE);
+                totalCredit.setVisibility(View.VISIBLE);
+                totalPaid.setVisibility(View.VISIBLE);
+                //showList("02/01/2017", "02/28/2017");
+                showList(fromDate,toDate);
+            }
+        });
+
 
         return view;
     }
+    private void onValidateFailed() {
 
-    private void showList() {
+    }
+
+    private boolean validate() {
+        boolean valid = true;
+
+        String email = toDateEditText.getText().toString();
+        String password = fromDateEditText.getText().toString();
+
+        if (email.isEmpty()) {
+            toDateEditText.setError(getResources().getString(R.string.setDate));
+            valid = false;
+        } else {
+            toDateEditText.setError(null);
+        }
+
+        if (password.isEmpty()) {
+            fromDateEditText.setError(getResources().getString(R.string.setDate));
+            valid = false;
+        } else {
+            fromDateEditText.setError(null);
+        }
+
+        return valid;
+    }
+
+    DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            if (one==1){
+                toDateEditText.setText(formatDate(calendar.getTime()));
+                toDate = formatDate(calendar.getTime());
+                one=2;
+            }
+            if (two==1){
+                fromDateEditText.setText(formatDate(calendar.getTime()));
+                fromDate = formatDate(calendar.getTime());
+                two=2;
+            }
+        }
+    };
+
+    public String formatDate(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+        String hireDate = sdf.format(date);
+        return hireDate;
+    }
+
+
+    private void showList(final String fromDate, final String toDate) {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getResources().getString(R.string.pleaseWait));

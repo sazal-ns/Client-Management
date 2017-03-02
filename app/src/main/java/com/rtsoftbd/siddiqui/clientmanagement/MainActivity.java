@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity{
             CURRENT_TAG = TAG_DASHBOARD;
             loadHomeFragment();
         }
-
     }
 
     private void setUpNavigationView() {

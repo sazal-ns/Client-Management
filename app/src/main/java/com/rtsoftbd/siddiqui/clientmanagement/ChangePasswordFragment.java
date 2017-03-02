@@ -197,7 +197,7 @@ public class ChangePasswordFragment extends Fragment {
         boolean valid = true;
 
 
-        if (password.isEmpty() || password.length() < 6 && password.length() > 50){
+        if (password.isEmpty() || password.length() < 6 || password.length() > 50){
             passwordEditText.setError(getResources().getString(R.string.passwordError));
             valid = false;
         }else passwordEditText.setError(null);
