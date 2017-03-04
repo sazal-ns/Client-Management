@@ -29,6 +29,8 @@ public class CustomListClientAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private List<AllUser> users;
 
+    private Boolean isPayment;
+
     @BindView(R.id.nameTextViewRow)TextView nameTextView;
     @BindView(R.id.mobileTextViewRow) TextView mobileTextView;
     @BindView(R.id.balanceTextViewRow) TextView balanceTextView;
@@ -36,9 +38,10 @@ public class CustomListClientAdapter extends BaseAdapter {
     @BindView(R.id.createdTextViewRow) TextView createdTextView;
     @BindView(R.id.statusImageViewRow) ImageView statusImageViewRow;
 
-    public CustomListClientAdapter(FragmentActivity activity, List<AllUser> users) {
+    public CustomListClientAdapter(FragmentActivity activity, List<AllUser> users, Boolean isPayment) {
         this.activity = activity;
         this.users = users;
+        this.isPayment = isPayment;
     }
 
     @Override
@@ -66,13 +69,23 @@ public class CustomListClientAdapter extends BaseAdapter {
         AllUser user = users.get(position);
 
         nameTextView.setText(user.getName());
-        mobileTextView.setText(user.getMobile());
-        balanceTextView.setText(String.valueOf(user.getBalance()));
-        lastLoginTextView.setText(user.getLoginDate());
-        createdTextView.setText(user.getCreated_at());
-        if (user.getStatus()==1) statusImageViewRow.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_check_green_a700_24dp));
-        else statusImageViewRow.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_close_red_a700_24dp));
+        if (!isPayment) {
+            mobileTextView.setText(user.getMobile());
+            balanceTextView.setText(String.valueOf(user.getBalance()));
+            lastLoginTextView.setText(user.getLoginDate());
+            createdTextView.setText(user.getCreated_at());
+            if (user.getStatus() == 1)
+                statusImageViewRow.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_check_green_a700_24dp));
+            else
+                statusImageViewRow.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_close_red_a700_24dp));
+        }else{
+            mobileTextView.setText(String.valueOf(user.getCredit()));
+            balanceTextView.setText(String.valueOf(user.getDebit()));
+            lastLoginTextView.setText(String.valueOf(user.getBalance()));
 
+            statusImageViewRow.setVisibility(View.GONE);
+            createdTextView.setVisibility(View.GONE);
+        }
 
         return convertView;
     }

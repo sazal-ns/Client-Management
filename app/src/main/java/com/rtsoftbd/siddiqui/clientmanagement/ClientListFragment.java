@@ -104,7 +104,7 @@ public class ClientListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_client_list, container, false);
         ButterKnife.bind(this,view);
 
-        customListClientAdapter = new CustomListClientAdapter(getActivity(), allUsers);
+        customListClientAdapter = new CustomListClientAdapter(getActivity(), allUsers,false);
         swipeMenuListView.setAdapter(customListClientAdapter);
 
         showList();

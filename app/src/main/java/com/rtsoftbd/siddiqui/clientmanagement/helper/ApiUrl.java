@@ -29,5 +29,8 @@ public class ApiUrl {
 
     public static final String LEGGER_BY_DATE = BASE_URL.concat("ledgarByDate");
 
+    public static final String CREDIT_PAYMENT = BASE_URL.concat("creditpayment");
+
+    public static final String PAID_PAYMENT = BASE_URL.concat("paidpayment");
 
 }

@@ -1,8 +1,53 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.rtsoftbd.siddiqui.clientmanagement.CreditPaymentFragment">
 
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8sp"
+        android:id="@+id/head"
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <TextView
+            android:text="@string/name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:id="@+id/nameTextView"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/creditPayment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:id="@+id/mobileTextView"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/debitPayment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:id="@+id/balanceTextView"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/balance"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:id="@+id/lastLoginTextView"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/head"/>
+
+</RelativeLayout>
