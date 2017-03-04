@@ -239,6 +239,13 @@ public class ClientListFragment extends Fragment {
     }
 
     private void editUser(AllUser user) {
+        Intent intent = new Intent(getContext(),EditClientActivity.class);
+        intent.putExtra("id",user.getId());
+        intent.putExtra("name",user.getName());
+        intent.putExtra("email",user.getEmail());
+        intent.putExtra("phone",user.getMobile());
+        intent.putExtra("dec",user.getDescription());
+        startActivity(intent);
 
     }
 

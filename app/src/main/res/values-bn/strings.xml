@@ -59,4 +59,6 @@
     <string name="setDate">তারিখ নির্বাচন করুন</string>
     <string name="selectFromDate">তারিখ হইতে</string>
     <string name="ledger">খতিয়ান</string>
+    <string name="s_ledger">এর খতিয়ান</string>
+    <string name="s_profile">এর প্রোফাইল</string>
 </resources>

@@ -83,4 +83,6 @@
     <string name="selectFromDate">From Date</string>
     <string name="setDate">Set Date</string>
     <string name="ledger">Ledger</string>
+    <string name="s_ledger">\'s ledger</string>
+    <string name="s_profile">\'s profile</string>
 </resources>

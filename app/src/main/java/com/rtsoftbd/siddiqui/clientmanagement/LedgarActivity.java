@@ -93,7 +93,7 @@ public class LedgarActivity extends AppCompatActivity {
 
         intent = getIntent();
         id = String.valueOf(intent.getIntExtra("id",0));
-        getSupportActionBar().setTitle(intent.getStringExtra("name")+"'s ledger");
+        getSupportActionBar().setTitle(intent.getStringExtra("name")+ getResources().getString(R.string.s_ledger));
 
         totalCredit = totalDebit = totalBalance = 0;
 
@@ -124,7 +124,7 @@ public class LedgarActivity extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.getJSONArray("clientBlance");
 
                         for (int i = 0; i< jsonArray.length(); i++){
-                            JSONObject object = jsonArray.getJSONObject(i);
+                            JSONObject object = jsonArray.getJSONObject( i);
                             Credit credit = new Credit();
                             credit.setId(object.getInt("id"));
                             credit.setName(object.getString("name"));
