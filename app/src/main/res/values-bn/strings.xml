@@ -58,4 +58,5 @@
     <string name="selectToDate">তারিখ পর্যন্ত</string>
     <string name="setDate">তারিখ নির্বাচন করুন</string>
     <string name="selectFromDate">তারিখ হইতে</string>
+    <string name="ledger">খতিয়ান</string>
 </resources>

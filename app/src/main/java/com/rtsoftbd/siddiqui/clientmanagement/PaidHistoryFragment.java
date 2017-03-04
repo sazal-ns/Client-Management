@@ -130,7 +130,7 @@ public class PaidHistoryFragment extends Fragment {
         listView.setVisibility(GONE);
         totalBalanceTextView.setVisibility(GONE);
 
-        customListAdapter = new CustomListAdapter(getActivity(), credits, false);
+        customListAdapter = new CustomListAdapter(getActivity(), credits, false, true);
         listView.setAdapter(customListAdapter);
 
         toDateEditText.setOnClickListener(new View.OnClickListener() {
@@ -292,8 +292,8 @@ public class PaidHistoryFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("fromDate", "02/01/2017");
-                params.put("toDate", "02/28/2017");
+                params.put("fromDate", fromDate);
+                params.put("toDate", toDate);
                 return params;
             }
         };

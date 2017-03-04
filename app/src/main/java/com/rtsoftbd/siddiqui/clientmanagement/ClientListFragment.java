@@ -2,6 +2,7 @@ package com.rtsoftbd.siddiqui.clientmanagement;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -181,7 +182,7 @@ public class ClientListFragment extends Fragment {
                 // set item width
                 openItem.setWidth(dp2px(90));
                 // set item title
-                openItem.setTitle("Open");
+                openItem.setTitle(getResources().getString(R.string.ledger));
                 // set item title fontsize
                 openItem.setTitleSize(18);
                 // set item title font color
@@ -216,10 +217,7 @@ public class ClientListFragment extends Fragment {
                         open(user);
                         break;
                     case 1:
-                        // delete
-//					delete(item);
-                        allUsers.remove(position);
-                        customListClientAdapter.notifyDataSetChanged();
+                        editUser(user);
                         break;
                 }
 
@@ -240,6 +238,10 @@ public class ClientListFragment extends Fragment {
         });
     }
 
+    private void editUser(AllUser user) {
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -257,7 +259,10 @@ public class ClientListFragment extends Fragment {
     }
 
     private void open(AllUser user) {
-        Log.e("open",user.getName());
+        Intent intent = new Intent(getContext(),LedgarActivity.class);
+        intent.putExtra("id",user.getId());
+        intent.putExtra("name",user.getName());
+        startActivity(intent);
     }
 
     private int dp2px(int dp) {

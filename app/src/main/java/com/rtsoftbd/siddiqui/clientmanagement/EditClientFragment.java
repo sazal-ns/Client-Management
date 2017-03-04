@@ -117,14 +117,14 @@ public class EditClientFragment extends Fragment {
                 phone = phoneEditText.getText().toString();
                 description = descriptionEditText.getText().toString();
 
-                editClient();
+                editClient(String.valueOf(User.getId()));
             }
         });
 
         return view;
     }
 
-    private void editClient() {
+    private void editClient(final String id) {
         if (!validate()) {
             onValidateFailed();
             return;
@@ -208,7 +208,7 @@ public class EditClientFragment extends Fragment {
                         params.put("name",userName);
                         params.put("email",email);
                         params.put("mobile",phone);
-                        params.put("id",String.valueOf(User.getId()));
+                        params.put("id",id);
                         params.put("description",description);
 
                         return params;

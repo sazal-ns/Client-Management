@@ -130,7 +130,7 @@ public class CreditHistoryFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_credit_history, container, false);
         ButterKnife.bind(this,view);
 
-        customListAdapter = new CustomListAdapter(getActivity(), credits, false);
+        customListAdapter = new CustomListAdapter(getActivity(), credits, false, true);
         listView.setAdapter(customListAdapter);
 
         head.setVisibility(GONE);

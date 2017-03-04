@@ -25,5 +25,9 @@ public class ApiUrl {
 
     public static final String CLIENT_LIST = BASE_URL.concat("clientList");
 
+    public static final String LEDGAR = BASE_URL.concat("ledgar");
+
+    public static final String LEGGER_BY_DATE = BASE_URL.concat("ledgarByDate");
+
 
 }

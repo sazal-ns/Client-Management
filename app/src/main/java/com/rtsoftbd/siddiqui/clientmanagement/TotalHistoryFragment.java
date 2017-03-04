@@ -131,7 +131,7 @@ public class TotalHistoryFragment extends Fragment {
 
         tCredit = tPaid = tBalance = 0;
 
-        customListAdapter = new CustomListAdapter(getActivity(), credits, true);
+        customListAdapter = new CustomListAdapter(getActivity(), credits, true, true);
         listView.setAdapter(customListAdapter);
 
         head.setVisibility(GONE);
@@ -303,8 +303,8 @@ public class TotalHistoryFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("fromDate", "02/01/2017");
-                params.put("toDate", "02/28/2017");
+                params.put("fromDate", fromDate);
+                params.put("toDate", toDate);
                 return params;
             }
         };

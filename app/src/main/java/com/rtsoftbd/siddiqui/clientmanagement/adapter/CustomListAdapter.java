@@ -27,16 +27,17 @@ import butterknife.ButterKnife;
 
 public class CustomListAdapter extends BaseAdapter {
 
-    private FragmentActivity activity;
+    private Activity activity;
     private LayoutInflater layoutInflater;
-    private Boolean isTotal;
+    private Boolean isTotal, isName;
 
     private List<Credit> credits;
 
-    public CustomListAdapter(FragmentActivity activity, List<Credit> credits, Boolean isTotal) {
+    public CustomListAdapter(Activity activity, List<Credit> credits, Boolean isTotal, Boolean isName) {
         this.activity = activity;
         this.credits = credits;
         this.isTotal = isTotal;
+        this.isName = isName;
     }
 
 
@@ -82,6 +83,8 @@ public class CustomListAdapter extends BaseAdapter {
         else {
             debitPayment.setVisibility(View.GONE);
         }
+
+        if (!isName) name.setVisibility(View.GONE);
         return convertView;
     }
 }
