@@ -190,7 +190,7 @@ public class CreditPaymentFragment extends Fragment {
                 // set item title
                 openItem.setTitle(getResources().getString(R.string.creditPayment));
                 // set item title fontsize
-                openItem.setTitleSize(18);
+                openItem.setTitleSize(15);
                 // set item title font color
                 openItem.setTitleColor(Color.BLACK);
                 // add to menu
@@ -204,7 +204,7 @@ public class CreditPaymentFragment extends Fragment {
                 // set item width
                 deleteItem.setWidth(dp2px(90));
                 // set item title fontsize
-                deleteItem.setTitleSize(18);
+                deleteItem.setTitleSize(15);
                 // set item title font color
                 deleteItem.setTitleColor(Color.BLACK);
                 // set a icon

@@ -85,4 +85,7 @@
     <string name="ledger">Ledger</string>
     <string name="s_ledger">\'s ledger</string>
     <string name="s_profile">\'s profile</string>
+    <string name="total_Summary">Total Summary</string>
+    <string name="last_Paid">Last Paid</string>
+    <string name="last_Credit">Last Credit</string>
 </resources>

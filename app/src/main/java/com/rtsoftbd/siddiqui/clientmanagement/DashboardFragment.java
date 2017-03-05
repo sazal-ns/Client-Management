@@ -4,9 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.github.aakira.expandablelayout.Utils;
+import com.rtsoftbd.siddiqui.clientmanagement.helper.ItemModel;
+import com.rtsoftbd.siddiqui.clientmanagement.helper.RecyclerViewRecyclerAdapter;
+import com.rtsoftbd.siddiqui.clientmanagement.model.Credit;
+import com.rtsoftbd.siddiqui.clientmanagement.model.DividerItemDecoration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -28,6 +39,7 @@ public class DashboardFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private List<Credit> credits = new ArrayList<>();
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -64,7 +76,35 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false);
+        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        final List<ItemModel> data = new ArrayList<>();
+        Credit credit = new Credit();
+        credit.setTotalCredit(200);
+        credit.setTotalPaid(500);
+
+        data.add(new ItemModel(
+                getResources().getString(R.string.total_Summary),
+                R.color.material_indigo_500,
+                R.color.material_indigo_300,
+                Utils.createInterpolator(Utils.ACCELERATE_INTERPOLATOR)));
+        data.add(new ItemModel(
+                getResources().getString(R.string.last_Paid),
+                R.color.material_red_500,
+                R.color.material_red_300,
+                Utils.createInterpolator(Utils.BOUNCE_INTERPOLATOR)));
+        data.add(new ItemModel(
+                getResources().getString(R.string.last_Credit),
+                R.color.material_green_600,
+                R.color.material_green_300,
+                Utils.createInterpolator(Utils.FAST_OUT_LINEAR_IN_INTERPOLATOR)));
+        recyclerView.setAdapter(new RecyclerViewRecyclerAdapter(credit, data, 0));
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

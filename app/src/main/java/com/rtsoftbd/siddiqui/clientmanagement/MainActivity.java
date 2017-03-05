@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity{
     private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
 
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity{
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        intent = getIntent();
 
         mHandler = new Handler();
 

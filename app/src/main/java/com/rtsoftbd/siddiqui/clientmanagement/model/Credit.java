@@ -6,9 +6,8 @@ package com.rtsoftbd.siddiqui.clientmanagement.model;
 
 public class Credit {
 
-    private int id, credit, debit, mixBalance, recentBalance, childId;
+    private int id, credit, debit, mixBalance, recentBalance, childId, totalCredit, totalPaid, totalCreditById,totalPaidById ;
     private String type, description, date, reportDate, name;
-
     public Credit() {
     }
 
@@ -24,6 +23,38 @@ public class Credit {
         this.date = date;
         this.reportDate = reportDate;
         this.name = name;
+    }
+
+    public int getTotalCredit() {
+        return totalCredit;
+    }
+
+    public void setTotalCredit(int totalCredit) {
+        this.totalCredit = totalCredit;
+    }
+
+    public int getTotalPaid() {
+        return totalPaid;
+    }
+
+    public void setTotalPaid(int totalPaid) {
+        this.totalPaid = totalPaid;
+    }
+
+    public int getTotalCreditById() {
+        return totalCreditById;
+    }
+
+    public void setTotalCreditById(int totalCreditById) {
+        this.totalCreditById = totalCreditById;
+    }
+
+    public int getTotalPaidById() {
+        return totalPaidById;
+    }
+
+    public void setTotalPaidById(int totalPaidById) {
+        this.totalPaidById = totalPaidById;
     }
 
     public int getId() {

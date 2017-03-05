@@ -186,7 +186,9 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.hide();
         progressDialog.dismiss();
         _loginButton.setEnabled(true);
-        startActivity(new Intent(this, MainActivity.class));
+        Intent intent =  new Intent(this, MainActivity.class);
+        intent.putExtra("permission",User.getPermission());
+        startActivity(intent);
         finish();
     }
 

@@ -61,4 +61,7 @@
     <string name="ledger">খতিয়ান</string>
     <string name="s_ledger">এর খতিয়ান</string>
     <string name="s_profile">এর প্রোফাইল</string>
+    <string name="total_Summary">মোট সংক্ষিপ্তসার</string>
+    <string name="last_Paid">সর্বশেষ পরিশোধিত</string>
+    <string name="last_Credit">সর্বশেষ জমা</string>
 </resources>
