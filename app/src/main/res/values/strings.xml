@@ -9,7 +9,7 @@
     <string name="loginFailed">Login Failed !!!</string>
     <string name="enterUserName">between  3 and 50  alphanumeric characters</string>
     <string name="passwordError">between  6 and 50  alphanumeric characters</string>
-    <string name="authenticating">Authenticating...</string>
+    <string name="authenticating">Authenticating…</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -95,4 +95,5 @@
     <string name="total_Summary">Total Summary</string>
     <string name="last_Paid">Last Paid</string>
     <string name="last_Credit">Last Credit</string>
+    <string name="changeStatus">Change Status</string>
 </resources>

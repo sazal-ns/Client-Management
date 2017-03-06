@@ -9,7 +9,7 @@ public class ApiUrl {
 
     public static final String LOGIN = BASE_URL.concat("user");
 
-    public static final String INDEX = BASE_URL.concat("adminpage");
+    static final String INDEX = BASE_URL.concat("adminpage");
 
     public static final String ADD_CLIENT = BASE_URL.concat("addclient");
 
@@ -32,5 +32,7 @@ public class ApiUrl {
     public static final String CREDIT_PAYMENT = BASE_URL.concat("creditpayment");
 
     public static final String PAID_PAYMENT = BASE_URL.concat("paidpayment");
+
+    public static final String SATAUS = BASE_URL.concat("status");
 
 }

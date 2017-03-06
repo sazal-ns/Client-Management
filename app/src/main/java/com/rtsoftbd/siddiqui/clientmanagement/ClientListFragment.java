@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.util.TypedValue;
@@ -15,6 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -34,7 +38,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -202,6 +208,23 @@ public class ClientListFragment extends Fragment {
                 deleteItem.setIcon(R.drawable.ic_border_color_black_24dp);
                 // add to menu
                 menu.addMenuItem(deleteItem);
+
+                // create "open" item
+                SwipeMenuItem changeStatus = new SwipeMenuItem(getContext());
+                // set item background
+                changeStatus.setBackground(new ColorDrawable(getResources().getColor(R.color.material_deep_purple_300)));
+                // set item width
+                changeStatus.setWidth(dp2px(90));
+                // set item title
+                changeStatus.setTitle(getResources().getString(R.string.status));
+                // set item title fontsize
+                changeStatus.setTitleSize(18);
+                // set item title font color
+                changeStatus.setTitleColor(Color.WHITE);
+                // add to menu
+                menu.addMenuItem(changeStatus);
+
+
             }
         };
 
@@ -213,11 +236,13 @@ public class ClientListFragment extends Fragment {
                 AllUser user = allUsers.get(position);
                 switch (index){
                     case 0:
-                        // open
                         open(user);
                         break;
                     case 1:
                         editUser(user);
+                        break;
+                    case 2:
+                        changeStatus(user);
                         break;
                 }
 
@@ -236,6 +261,54 @@ public class ClientListFragment extends Fragment {
 
             }
         });
+    }
+
+    private void changeStatus(final AllUser user) {
+        progressDialog.show();
+        new MaterialDialog.Builder(getContext())
+                .content(R.string.changeStatus)
+                .positiveText(R.string.yes)
+                .positiveColor(getResources().getColor(R.color.material_green_800))
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.SATAUS, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                progressDialog.dismiss();
+                                new ShowDialog(getContext(), getResources().getString(R.string.success),
+                                        getResources().getString(R.string.successfullyAccomplished),true,
+                                        getResources().getDrawable(R.drawable.ic_done_all_green_a700_24dp));
+
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                progressDialog.dismiss();
+                                Log.e("Error", error.toString());
+                                if (error.toString().contains("NoConnectionError")){
+                                    new ShowDialog(getContext(), null, getResources().getString(R.string.noInternet),true,null);
+                                }
+                            }
+                        }){
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                Map<String, String> params = new HashMap<>();
+                                params.put("id", String.valueOf(user.getId()));
+                                params.put("status", String.valueOf(user.getStatus()));
+
+                                Log.e("check", String.valueOf(user.getId()+"-->"+user.getStatus()));
+                                return params;
+                            }
+                        };
+
+                        Volley.newRequestQueue(getContext()).add(request);
+                    }
+                })
+                .negativeText(R.string.no)
+                .negativeColor(getResources().getColor(R.color.material_red_800))
+                .show();
+        progressDialog.dismiss();
     }
 
     private void editUser(AllUser user) {
