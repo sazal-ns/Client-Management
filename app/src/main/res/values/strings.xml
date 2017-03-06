@@ -44,6 +44,13 @@
         <item>@string/profileUpdate</item>
     </string-array>
 
+    <string-array name="nav_item_activity_title_client">
+        <item>@string/dashboard</item>
+        <item>@string/totalHistory</item>
+        <item>@string/changePassword</item>
+        <item>@string/profileUpdate</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="confirmPassword">Confirm Password</string>

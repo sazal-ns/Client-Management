@@ -88,7 +88,7 @@ public class DashboardFragment extends Fragment {
                 getResources().getString(R.string.total_Summary),
                 R.color.material_indigo_500,
                 R.color.material_indigo_300,
-                Utils.createInterpolator(Utils.ACCELERATE_INTERPOLATOR)));
+                Utils.createInterpolator(Utils.BOUNCE_INTERPOLATOR)));
         data.add(new ItemModel(
                 getResources().getString(R.string.last_Paid),
                 R.color.material_red_500,
@@ -98,7 +98,7 @@ public class DashboardFragment extends Fragment {
                 getResources().getString(R.string.last_Credit),
                 R.color.material_green_600,
                 R.color.material_green_300,
-                Utils.createInterpolator(Utils.FAST_OUT_LINEAR_IN_INTERPOLATOR)));
+                Utils.createInterpolator(Utils.BOUNCE_INTERPOLATOR)));
         recyclerView.setAdapter(new RecyclerViewRecyclerAdapter(data, User.getPermission(), getActivity()));
 
         return view;

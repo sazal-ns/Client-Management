@@ -18,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.rtsoftbd.siddiqui.clientmanagement.model.User;
+
 public class MainActivity extends AppCompatActivity{
 
     private static final String TAG_DASHBOARD       = "DASHBOARD";
@@ -45,16 +47,12 @@ public class MainActivity extends AppCompatActivity{
     private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
 
-    private Intent intent;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        intent = getIntent();
 
         mHandler = new Handler();
 
@@ -64,9 +62,25 @@ public class MainActivity extends AppCompatActivity{
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        activityTitles = getResources().getStringArray(R.array.nav_item_activity_title);
+        if (User.getPermission()!=1) {
+            Menu m = navigationView.getMenu();
+            m.findItem(R.id.addClient).setVisible(false);
+            m.findItem(R.id.clientList).setVisible(false);
+            m.findItem(R.id.creditPayment).setVisible(false);
+            m.findItem(R.id.debitPayment).setVisible(false);
+            m.findItem(R.id.creditHistory).setVisible(false);
+            m.findItem(R.id.paidHistory).setVisible(false);
+        }
+        if (User.getPermission()==1) {
+            activityTitles = getResources().getStringArray(R.array.nav_item_activity_title);
+            setUpNavigationView();
+        }
+        else {
+            activityTitles = getResources().getStringArray(R.array.nav_item_activity_title_client);
+            setUpNavigationViewClient();
+        }
 
-        setUpNavigationView();
+
 
         if (savedInstanceState == null) {
             navItemIndex = 0;
@@ -154,6 +168,61 @@ public class MainActivity extends AppCompatActivity{
         actionBarDrawerToggle.syncState();
     }
 
+    private void setUpNavigationViewClient() {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.dashboard:
+                        navItemIndex = 0;
+                        CURRENT_TAG = TAG_DASHBOARD;
+                        break;
+                    case R.id.totalHistory:
+                        navItemIndex = 1;
+                        CURRENT_TAG = TAG_TOTAL_HISTORY;
+                        break;
+                    case R.id.changePassword:
+                        navItemIndex = 2;
+                        CURRENT_TAG = TAG_CHANGE_PASSWORD;
+                        break;
+                    case R.id.profileUpdate:
+                        navItemIndex = 3;
+                        CURRENT_TAG = TAG_PROFILE_UPDATE;
+                        break;
+                    case R.id.logout:
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        finish();
+                        break;
+                    default:
+                        navItemIndex =0;
+                }
+
+                loadHomeFragment();
+                return true;
+            }
+        });
+
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+                super.onDrawerClosed(drawerView);
+            }
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+                super.onDrawerOpened(drawerView);
+            }
+        };
+
+        //Setting the actionbarToggle to drawer layout
+        drawer.setDrawerListener(actionBarDrawerToggle);
+
+        //calling sync state is necessary or else your hamburger icon wont show up
+        actionBarDrawerToggle.syncState();
+    }
+
     private void loadHomeFragment() {
 
         // set toolbar title
@@ -162,7 +231,9 @@ public class MainActivity extends AppCompatActivity{
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                Fragment fragment = getHomeFragment();
+                Fragment fragment = null;
+                if (User.getPermission()==1) fragment = getHomeFragment();
+                else fragment = getHomeFragmentClient();
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
                         android.R.anim.fade_out);
@@ -201,6 +272,19 @@ public class MainActivity extends AppCompatActivity{
             case 8:
                 return new ChangePasswordFragment();
             case 9:
+                return new EditClientFragment();
+            default:
+                return new DashboardFragment();
+        }
+    }
+
+    private Fragment getHomeFragmentClient() {
+        switch (navItemIndex) {
+            case 1:
+                return new ClientFragment();
+            case 2:
+                return new ChangePasswordFragment();
+            case 3:
                 return new EditClientFragment();
             default:
                 return new DashboardFragment();
