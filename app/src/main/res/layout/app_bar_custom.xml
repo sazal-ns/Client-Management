@@ -25,10 +25,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/heade">
+        android:layout_below="@+id/heade"
+        android:layout_above="@+id/copy">
         <include layout="@layout/fragment_total_history"/>
     </LinearLayout>
 
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10sp"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/copyright"
+        android:id="@+id/copy"/>
 
 </RelativeLayout>

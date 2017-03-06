@@ -65,4 +65,5 @@
     <string name="last_Paid">সর্বশেষ পরিশোধিত</string>
     <string name="last_Credit">সর্বশেষ জমা</string>
     <string name="changeStatus">অবস্থা বদলান</string>
+    <string name="hello_blank_fragment">রিফ্রেশ</string>
 </resources>

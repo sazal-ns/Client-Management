@@ -8,4 +8,11 @@
 
     <include layout="@layout/app_bar_edit_client"/>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10sp"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/copyright"/>
+
 </RelativeLayout>

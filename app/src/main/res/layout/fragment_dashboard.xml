@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="20sp"
     tools:context="com.rtsoftbd.siddiqui.clientmanagement.DashboardFragment">
 
@@ -10,6 +11,15 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:layout_above="@+id/copy"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10sp"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/copyright"
+        android:id="@+id/copy"/>
 
 </RelativeLayout>
