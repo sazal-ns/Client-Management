@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8sp"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:text="@string/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/nameTextViewRow"
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="@string/timeDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/timeDateTextViewRow"
+        android:layout_weight="1" />
+
+
+    <TextView
+        android:text="@string/balance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/balanceTextViewRow"
+        android:layout_weight="1" />
+
+</LinearLayout>

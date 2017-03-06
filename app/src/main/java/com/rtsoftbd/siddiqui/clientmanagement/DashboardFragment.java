@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import com.github.aakira.expandablelayout.Utils;
 import com.rtsoftbd.siddiqui.clientmanagement.helper.ItemModel;
 import com.rtsoftbd.siddiqui.clientmanagement.helper.RecyclerViewRecyclerAdapter;
-import com.rtsoftbd.siddiqui.clientmanagement.model.Credit;
 import com.rtsoftbd.siddiqui.clientmanagement.model.DividerItemDecoration;
+import com.rtsoftbd.siddiqui.clientmanagement.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class DashboardFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    private List<Credit> credits = new ArrayList<>();
+
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -83,9 +83,6 @@ public class DashboardFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         final List<ItemModel> data = new ArrayList<>();
-        Credit credit = new Credit();
-        credit.setTotalCredit(200);
-        credit.setTotalPaid(500);
 
         data.add(new ItemModel(
                 getResources().getString(R.string.total_Summary),
@@ -102,10 +99,12 @@ public class DashboardFragment extends Fragment {
                 R.color.material_green_600,
                 R.color.material_green_300,
                 Utils.createInterpolator(Utils.FAST_OUT_LINEAR_IN_INTERPOLATOR)));
-        recyclerView.setAdapter(new RecyclerViewRecyclerAdapter(credit, data, 0));
+        recyclerView.setAdapter(new RecyclerViewRecyclerAdapter(data, User.getPermission(), getActivity()));
 
         return view;
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

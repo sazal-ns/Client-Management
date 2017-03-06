@@ -1,6 +1,8 @@
 package com.rtsoftbd.siddiqui.clientmanagement.helper;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -13,14 +15,29 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.aakira.expandablelayout.ExpandableLayout;
 import com.github.aakira.expandablelayout.ExpandableLayoutListenerAdapter;
 import com.github.aakira.expandablelayout.ExpandableLinearLayout;
 import com.github.aakira.expandablelayout.Utils;
 import com.rtsoftbd.siddiqui.clientmanagement.R;
+import com.rtsoftbd.siddiqui.clientmanagement.adapter.CustomListAdapterIndex;
 import com.rtsoftbd.siddiqui.clientmanagement.model.Credit;
+import com.rtsoftbd.siddiqui.clientmanagement.model.User;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class RecyclerViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerViewRecyclerAdapter.ViewHolder> {
@@ -31,13 +48,22 @@ public class RecyclerViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
     private int who;
     private SparseBooleanArray expandState = new SparseBooleanArray();
 
-    public RecyclerViewRecyclerAdapter(Credit credit, final List<ItemModel> data, int who) {
-        this.credit = credit;
+    private ProgressDialog progressDialog;
+    private List<Credit> credits = new ArrayList<>();
+    private List<Credit> paids = new ArrayList<>();
+    private CustomListAdapterIndex customListAdapter;
+    private CustomListAdapterIndex customListAdapterPaid;
+    private Activity activity;
+
+
+    public RecyclerViewRecyclerAdapter(final List<ItemModel> data, int who, Activity activity) {
         this.data = data;
         this.who = who;
+        this.activity = activity;
         for (int i = 0; i < data.size(); i++) {
             expandState.append(i, false);
         }
+        credit = new Credit();
     }
 
     @Override
@@ -45,14 +71,126 @@ public class RecyclerViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
         this.context = parent.getContext();
         ViewHolder holder = new ViewHolder(LayoutInflater.from(context).inflate(R.layout.recycler_view_list_row, parent, false));
 
+        customListAdapter = new CustomListAdapterIndex(activity, credits);
+        holder.creditListView.setAdapter(customListAdapter);
+        customListAdapterPaid = new CustomListAdapterIndex(activity, paids);
+        holder.paidListView.setAdapter(customListAdapterPaid);
+
+        loadList(holder);
+        progressDialog = new ProgressDialog(activity);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage(context.getResources().getString(R.string.pleaseWait));
+        //progressDialog.show();
+
         return holder;
+    }
+
+    private void loadList(final ViewHolder holder) {
+        StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.INDEX, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getString("error").contentEquals("false")) {
+
+                        if (who==1) {
+                            credit.setTotalCredit(jsonObject.getInt("totalCredit"));
+                            credit.setTotalPaid(jsonObject.getInt("totalPaid"));
+                            }else {
+                            credit.setTotalCredit(jsonObject.getInt("totalCreditById"));
+                            credit.setTotalPaid(jsonObject.getInt("totalPaidById"));
+                            }
+                            Log.e("check ", String.valueOf(credit.getTotalPaid()));
+                        holder.totalPaidTextView.setText(context.getResources().getString(R.string.totalPaid) + "\t" + String.valueOf(credit.getTotalPaid()));
+                        holder.totalCreditTextView.setText(context.getResources().getString(R.string.totalCredit) + "\t" + String.valueOf(credit.getTotalCredit()));
+                        holder.totalBalanceTextView.setText(context.getResources().getString(R.string.balance) + "\t" + String.valueOf(credit.getTotalCredit() - credit.getTotalPaid()));
+                        JSONArray jsonArray=null;
+                        if (who==1) {
+                            jsonArray = jsonObject.getJSONArray("allcredit");
+                        }else {
+                            jsonArray = jsonObject.getJSONArray("creditById");
+                        }
+                        for (int i = 0; i< jsonArray.length(); i++){
+                            JSONObject object = jsonArray.getJSONObject(i);
+                            Credit credit = new Credit();
+                            credit.setId(object.getInt("id"));
+                            credit.setName(object.getString("name"));
+                            credit.setCredit(object.getInt("credit"));
+                            credit.setDebit(object.getInt("debit"));
+                            credit.setMixBalance(object.getInt("mixBalance"));
+                            credit.setRecentBalance(object.getInt("recentBalance"));
+                            credit.setChildId(object.getInt("childId"));
+                            credit.setType(object.getString("type"));
+                            credit.setDescription(object.getString("description"));
+                            credit.setDate(object.getString("date"));
+                            credit.setReportDate(object.getString("reportDate"));
+
+                            credits.add(credit);
+                        }
+                        customListAdapter.notifyDataSetChanged();
+
+                        JSONArray jsonArrayPaid=null;
+                        if (who==1) {
+                            jsonArrayPaid = jsonObject.getJSONArray("allPaid");
+                        }else {
+                            jsonArrayPaid = jsonObject.getJSONArray("paidById");
+                        }
+
+                        for (int i = 0; i< jsonArrayPaid.length(); i++){
+                            JSONObject object = jsonArrayPaid.getJSONObject(i);
+                            Credit credit = new Credit();
+                            credit.setId(object.getInt("id"));
+                            credit.setName(object.getString("name"));
+                            credit.setCredit(object.getInt("credit"));
+                            credit.setDebit(object.getInt("debit"));
+                            credit.setMixBalance(object.getInt("mixBalance"));
+                            credit.setRecentBalance(object.getInt("recentBalance"));
+                            credit.setChildId(object.getInt("childId"));
+                            credit.setType(object.getString("type"));
+                            credit.setDescription(object.getString("description"));
+                            credit.setDate(object.getString("date"));
+                            credit.setReportDate(object.getString("reportDate"));
+
+                            paids.add(credit);
+                        }
+                        customListAdapterPaid.notifyDataSetChanged();
+                        progressDialog.dismiss();
+                    }else{
+                        Log.e("else",response);
+                        progressDialog.dismiss();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Log.e("Error", error.toString());
+                if (error.toString().contains("NoConnectionError")){
+                    new ShowDialog(context.getApplicationContext(), null, context.getResources().getString(R.string.noInternet),true,null);
+                }
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", String.valueOf(User.getId()));
+                return params;
+            }
+        };
+
+        Volley.newRequestQueue(context.getApplicationContext()).add(request);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final ItemModel item = data.get(position);
-        Log.e("position", String.valueOf(position));
-        holder.setIsRecyclable(false);
         holder.textView.setText(item.description);
         holder.itemView.setBackgroundColor(ContextCompat.getColor(context, item.colorId1));
         holder.expandableLayout.setInRecyclerView(true);
@@ -92,12 +230,6 @@ public class RecyclerViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
                 onClickButton(holder.expandableLayout);
             }
         });
-
-        if (who ==0) {
-            holder.totalPaidTextView.setText(context.getResources().getString(R.string.totalPaid) + "\t" + String.valueOf(credit.getTotalPaid()));
-            holder.totalCreditTextView.setText(context.getResources().getString(R.string.totalCredit) + "\t" + String.valueOf(credit.getTotalCredit()));
-            holder.totalBalanceTextView.setText(context.getResources().getString(R.string.balance) + "\t" + String.valueOf(credit.getTotalPaid() - credit.getTotalCredit()));
-        }
     }
 
     private void onClickButton(final ExpandableLayout expandableLayout) {
@@ -139,4 +271,6 @@ public class RecyclerViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
         animator.setInterpolator(Utils.createInterpolator(Utils.LINEAR_INTERPOLATOR));
         return animator;
     }
+
+
 }
